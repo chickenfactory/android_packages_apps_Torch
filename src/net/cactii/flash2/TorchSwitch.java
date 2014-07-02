@@ -46,11 +46,10 @@ public class TorchSwitch extends BroadcastReceiver {
         // Unload intent extras if they exist:
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean bright = intent.getBooleanExtra("bright", prefs.getBoolean("bright", false));
-        boolean stop = intent.getBooleanExtra("stop", false);
 
         Intent i = new Intent(context, TorchService.class);
         if (action.equals(TOGGLE_FLASHLIGHT)) {
-            if (this.torchServiceRunning(context) || stop) {
+            if (this.torchServiceRunning(context)) {
                 context.stopService(i);
             } else {
                 i.putExtra("bright", bright);
